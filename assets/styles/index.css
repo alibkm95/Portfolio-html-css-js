@@ -165,15 +165,10 @@ html {
   --orange-800: #8c3600;
   --orange-900: #6b2a00;
   --body-bg: #fff;
-  /* #121212 */
   --elem-bg: rgba(0, 0, 0, 0.05);
-  /* rgba(255, 255, 255, 0.05)*/
   --txt-p: #000000;
-  /* #ffffff */
   --txt-p-transparent: rgba(0, 0, 0, 0.7);
-  /* rgba(255,255,255, 0.7)  */
   --txt-s: #c3c3c3;
-  /* #c3c3c3 */
   font-size: 100%;
 }
 
@@ -249,6 +244,7 @@ body {
   flex-direction: column;
   gap: 1rem;
   overflow-y: auto;
+  border-left: 1px solid var(--orange-100);
 }
 
 .menu__list-item {
@@ -281,9 +277,10 @@ body {
   border: none;
 }
 
-.theme-btn {
+.theme-btn>a {
+  display: block;
   background-color: var(--orange-500);
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   border-radius: 5px;
   color: white;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -292,7 +289,7 @@ body {
   transition: all 0.3s ease;
 }
 
-.theme-btn:hover {
+.theme-btn>a:hover {
   color: black;
   box-shadow: none;
 }
@@ -338,7 +335,9 @@ body {
     align-items: center;
     justify-content: center;
     padding: 0;
-    gap: 0.5rem;
+    gap: 0.8rem;
+    border: none;
+    font-size: 0.8rem;
   }
 
   .menu__list-item:not(:last-child) {
@@ -357,8 +356,8 @@ body {
 
 @media screen and (min-width: 1200px) {
   .menu__list{
-    gap: 0.8rem;
-    font-size: 1.2rem;
+    gap: 1.2rem;
+    font-size: 1.1rem;
   }
 
   .menu__logo-img img {
