@@ -129,7 +129,7 @@ table {
   border-spacing: 0;
 }
 
-a{
+a {
   font: inherit;
   color: inherit;
   text-decoration: none;
@@ -137,7 +137,7 @@ a{
 
 input,
 textarea,
-button{
+button {
   font: inherit;
   color: inherit;
 }
@@ -147,13 +147,13 @@ button{
 
 *,
 *::after,
-*::before{
+*::before {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html{
+html {
   --orange-50: #ffefe6;
   --orange-100: #ffcfb0;
   --orange-200: #ffb78a;
@@ -164,26 +164,210 @@ html{
   --orange-700: #b54600;
   --orange-800: #8c3600;
   --orange-900: #6b2a00;
-  --body-bg: #fff; /* in dark mode #121212 */
-  --elem-bg: rgba(0, 0, 0, 0.05); /* in dark mode rgba(255, 255, 255, 0.05)*/
-  --txt-p: #000000; /* in dark mode #ffffff */
-  --txt-s: #c3c3c3; /* in dark mode #c3c3c3 */
+  --body-bg: #fff;
+  /* #121212 */
+  --elem-bg: rgba(0, 0, 0, 0.05);
+  /* rgba(255, 255, 255, 0.05)*/
+  --txt-p: #000000;
+  /* #ffffff */
+  --txt-p-transparent: rgba(0, 0, 0, 0.7);
+  /* rgba(255,255,255, 0.7)  */
+  --txt-s: #c3c3c3;
+  /* #c3c3c3 */
   font-size: 100%;
 }
 
-body{
+body {
   font-family: 'Poppins', sans-serif;
   overflow-x: hidden;
+  background-color: var(--body-bg);
+  color: var(--txt-p);
 }
 
 /* global styles end */
 /* main styles start ---------------------------------- */
 
+.header {
+  width: 100%;
+}
 
+.menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.menu__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.menu__logo-img img {
+  display: block;
+  width: 100%;
+  max-width: 2rem;
+}
+
+.menu__logo-text {
+  font-weight: 900;
+  font-size: 1.2rem;
+  color: var(--txt-p);
+  letter-spacing: 2px;
+}
+
+.menu__logo-text>span {
+  color: var(--txt-p-transparent);
+}
+
+.menu__container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  right: -100%;
+  backdrop-filter: blur(2px);
+  transition: all 0.3s ease;
+}
+
+.menu__container.active{
+  right: 0;
+}
+
+.menu__list {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20rem;
+  height: 100%;
+  background-color: var(--body-bg);
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: auto;
+}
+
+.menu__list-item {
+  padding-block: 0.5rem;
+  border-bottom: 1px solid var(--elem-bg);
+}
+
+.menu__link {
+  width: max-content;
+  transition: all 0.3s ease;
+}
+
+.menu__link:hover {
+  color: var(--orange-400);
+}
+
+.menu__toggler {
+  font-size: 1.5rem;
+  color: var(--txt-p);
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.menu__toggler:hover{
+  color: var(--orange-400);
+}
+
+.close-btn,
+.theme-btn {
+  border: none;
+}
+
+.theme-btn {
+  background-color: var(--orange-500);
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  color: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.theme-btn:hover {
+  color: black;
+  box-shadow: none;
+}
 
 /* main styles end */
 /* responsive styles start ---------------------------------- */
 
+@media screen and (min-width: 540px) {}
 
+@media screen and (min-width: 768px) {
+
+  .header{
+    width: 90%;
+    margin-inline: auto;
+  }
+
+  .menu{
+    box-shadow: none;
+    padding-inline: 0;
+    padding-block: clamp(1rem, 1rem + 0.5vw, 1.5rem);
+  }
+}
+
+@media screen and (min-width: 940px) {
+  .header{
+    width: 80%;
+  }
+
+  .menu__toggler{
+    display: none;
+  }
+
+  .menu__container{
+    position: static;
+    width: auto;
+    height: auto;
+  }
+
+  .menu__list{
+    position: static;
+    width: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    gap: 0.5rem;
+  }
+
+  .menu__list-item:not(:last-child) {
+    padding: 0;
+    border: none;
+  }
+
+  .close-btn{
+    display: none;
+  }
+
+  .menu__logo-img img {
+    max-width: 3rem;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .menu__list{
+    gap: 0.8rem;
+    font-size: 1.2rem;
+  }
+
+  .menu__logo-img img {
+    max-width: 4rem;
+  }
+  
+  .menu__logo-text {
+    font-size: 2rem;
+  }
+}
 
 /* responsive styles end */
