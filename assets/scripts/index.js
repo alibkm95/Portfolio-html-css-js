@@ -5,6 +5,56 @@ const themeBtn = document.querySelector('.theme-btn>a')
 
 let currentTheme = null
 
+class Typewriter {
+  constructor(el, options) {
+    this.el = el
+    this.words = [...this.el.dataset.typewrite.split(',')]
+    this.speed = options?.speed || 150
+    this.delay = options?.delay || 1500
+    this.repeat = options?.repeat
+    this.initTyping()
+  }
+
+  wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+
+  toggleTyping = () => {
+    this.el.classList.toggle('blink')
+  }
+
+  async typewrite(word) {
+    await this.wait(this.delay)
+    this.toggleTyping()
+    for (const letter of word.split('')) {
+      this.el.textContent += letter
+      await this.wait(this.speed)
+    }
+    this.toggleTyping()
+    await this.wait(this.delay)
+    this.toggleTyping()
+
+    while (this.el.textContent.length !== 0) {
+      this.el.textContent = this.el.textContent.slice(0, -1)
+      await this.wait(this.speed)
+    }
+    this.toggleTyping()
+  }
+
+  async initTyping() {
+    for (const word of this.words) {
+      await this.typewrite(word)
+    }
+
+    if (this.repeat) {
+      await this.initTyping()
+    }
+  }
+}
+
+const el = new Typewriter(document.querySelector('.hero__content-tw'), {
+  speed: 150,
+  delay: 2000,
+  repeat: true
+})
 
 menuTogglerBtn.addEventListener('click', (event) => {
   openMenu()
@@ -23,7 +73,7 @@ menuItemsElem.forEach(item => {
 })
 
 themeBtn.addEventListener('click', () => {
-  if( currentTheme === 'light'){
+  if (currentTheme === 'light') {
     renderTheme('dark')
     return
   }
@@ -40,7 +90,7 @@ const closeMenu = () => {
 }
 
 const renderTheme = (mode) => {
-  if(mode === 'light'){
+  if (mode === 'light') {
     themeBtn.innerHTML = ''
     themeBtn.innerHTML = `
       Dark mode

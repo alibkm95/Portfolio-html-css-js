@@ -185,6 +185,12 @@ body {
   padding: 1rem;
 }
 
+@keyframes blink {
+  100%{
+    opacity: 1;
+  }
+}
+
 /* global styles end */
 /* main styles start ---------------------------------- */
 
@@ -330,11 +336,36 @@ body {
 
 .hero__content-header {
   font-size: clamp(1.5rem, 1.5rem + 2vw, 5rem);
+  min-height: clamp(5rem, 5rem + 2.5vw, 10rem);
   font-weight: 900;
 }
 
-.hero__content-tw-bottom {
-  text-indent: 4rem;
+.hero__content-tw {
+  width: min-content;
+  min-height: 1ch;
+  word-break: keep-all;
+  padding-left: 0.5em;
+  letter-spacing: 2px;
+  position: relative;
+  line-height: 1.05;
+}
+
+.hero__content-tw::first-line{
+  text-indent: -0.5em;
+}
+
+.blink::after{
+  content: "";
+  display: block;
+  position: absolute;
+  width: 1rem;
+  height: 3px;
+  background-color: var(--orange-500);
+  bottom: 0;
+  left: 100%;
+  z-index: 10;
+  opacity: 0;
+  animation: blink infinite linear 0.5s;
 }
 
 .hero__content-desc {
@@ -354,6 +385,12 @@ body {
   color: white;
   letter-spacing: 2px;
   width: max-content;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.hero__content-btn:hover{
+  transform: scale(1.1);
 }
 
 .hero__image {
