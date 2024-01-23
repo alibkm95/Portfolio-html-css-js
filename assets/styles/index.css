@@ -822,6 +822,12 @@ body {
   white-space: nowrap;
   border: none;
   background-color: var(--orange-500);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.contact__form-submit:hover{
+  transform: translateY(-5px);
 }
 
 /* main styles end */
