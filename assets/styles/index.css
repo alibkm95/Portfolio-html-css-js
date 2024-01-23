@@ -170,6 +170,7 @@ html {
   --txt-p-transparent: rgba(0, 0, 0, 0.7);
   --txt-s: #c3c3c3;
   font-size: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
