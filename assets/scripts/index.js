@@ -1,7 +1,10 @@
+import projects from './db.js'
 const menuContainerElem = document.getElementById('menu-container')
 const menuTogglerBtn = document.querySelector('.menu__toggler')
 const menuItemsElem = document.querySelectorAll('.menu__list-item>a')
 const themeBtn = document.querySelector('.theme-btn>a')
+const filterBtns = document.querySelectorAll('.projects__filter-btn')
+const projectsContainerElem = document.querySelector('.projects__container')
 
 let currentTheme = null
 
@@ -54,6 +57,15 @@ const el = new Typewriter(document.querySelector('.hero__content-tw'), {
   speed: 150,
   delay: 2000,
   repeat: true
+})
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', (event) => {
+    filterBtns.forEach(filterBtn => filterBtn.classList.remove('active'))
+    event.target.classList.add('active')
+    let filterType = event.target.getAttribute('data-projtype')
+    renderProjects(filterType)
+  })
 })
 
 menuTogglerBtn.addEventListener('click', (event) => {
@@ -117,6 +129,46 @@ const renderTheme = (mode) => {
   }
 }
 
+const renderProjects = (projectType) => {
+  
+  projectsContainerElem.innerHTML = ''
+
+  if(projectType === 'all'){
+    projects.forEach(project => {
+      projectsContainerElem.innerHTML += `
+      <div class="projects__box">
+        <img src="${project.img}">
+        <p class="projects__box-type">
+          ${project.type}
+        </p>
+        <p class="projects__box-title">
+          ${project.title}
+        </p>
+      </div> 
+      `
+    })
+    return
+  }
+
+  let filteredProjects = projects.filter(project => {
+    return project.type === projectType
+  })
+
+  filteredProjects.forEach(project => {
+    projectsContainerElem.innerHTML += `
+    <div class="projects__box">
+      <img src="${project.img}">
+      <p class="projects__box-type">
+        ${project.type}
+      </p>
+      <p class="projects__box-title">
+        ${project.title}
+      </p>
+    </div> 
+    `
+  })
+}
+
 window.addEventListener('load', () => {
   currentTheme = localStorage.getItem('user-theme')
 
@@ -127,4 +179,11 @@ window.addEventListener('load', () => {
   }
 
   renderTheme(currentTheme)
+
+  filterBtns.forEach(btn => {
+    if (btn.classList.contains('active')) {
+      let projectType = btn.getAttribute('data-projtype')
+      renderProjects(projectType)
+    }
+  })
 })
