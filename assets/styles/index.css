@@ -578,7 +578,8 @@ body {
 
 .services,
 .projects,
-.testimonial {
+.testimonial,
+.contact {
   margin-top: 3rem;
   display: flex;
   flex-direction: column;
@@ -589,14 +590,16 @@ body {
 
 .services__header,
 .projects__header,
-.testimonial__header {
+.testimonial__header,
+.contact__header {
   font-size: clamp(1rem, 1rem + 1vw, 3rem);
   font-weight: 600;
 }
 
 .services__txt,
 .projects__txt,
-.testimonial__txt {
+.testimonial__txt,
+.contact__txt {
   max-width: 500px;
   text-align: center;
   line-height: 1.2;
@@ -788,6 +791,39 @@ body {
   background-color: var(--orange-500);
 }
 
+.contact__form{
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding-block: 3rem;
+}
+
+.contact__form-submit,
+.contact__form-input{
+  align-self: stretch;
+  padding-inline: 0.8rem;
+  padding-block: 0.5rem;
+  border-radius: 5px;
+  outline: transparent;
+  font-size: 0.9rem;
+}
+
+.contact__form-input{
+  color: black;
+  width: 100%;
+  border: 1px solid var(--txt-s);
+}
+
+.contact__form-submit{
+  color: white;
+  white-space: nowrap;
+  border: none;
+  background-color: var(--orange-500);
+}
+
 /* main styles end */
 /* responsive styles start ---------------------------------- */
 
@@ -829,7 +865,8 @@ body {
 
   .services,
   .projects,
-  .testimonial {
+  .testimonial,
+  .contact {
     margin-top: 6rem;
   }
 
