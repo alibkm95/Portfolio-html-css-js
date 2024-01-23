@@ -5,8 +5,12 @@ const menuItemsElem = document.querySelectorAll('.menu__list-item>a')
 const themeBtn = document.querySelector('.theme-btn>a')
 const filterBtns = document.querySelectorAll('.projects__filter-btn')
 const projectsContainerElem = document.querySelector('.projects__container')
+const sliderParent = document.querySelector('.slider')
+const sliderItems = document.querySelectorAll('.slider__item')
+const sliderControls = document.querySelectorAll('.testimonial__controls-btn')
 
 let currentTheme = null
+let currentIndex = 2
 
 class Typewriter {
   constructor(el, options) {
@@ -57,6 +61,16 @@ const el = new Typewriter(document.querySelector('.hero__content-tw'), {
   speed: 150,
   delay: 2000,
   repeat: true
+})
+
+sliderControls.forEach(sliderControl => {
+  sliderControl.addEventListener('click', event => {
+    sliderControls.forEach(control => control.classList.remove('active'))
+    event.target.classList.add('active')
+    let dataIndex = parseInt(event.target.getAttribute('data-index'))
+    currentIndex = dataIndex
+    slideHandler(dataIndex)
+  })
 })
 
 filterBtns.forEach(btn => {
@@ -169,6 +183,38 @@ const renderProjects = (projectType) => {
   })
 }
 
+const slideHandler = (index) => {
+  sliderParent.style.transform = `translateX(calc(-${index * 100}% - ${index}rem))`
+
+  sliderItems.forEach(item => {
+    item.classList.remove('active')
+  })
+
+  sliderItems[index].classList.add('active')
+}
+
+const autoSlide = (delay) => {
+  setInterval(() => {
+    currentIndex++
+
+    if(currentIndex > 4){
+      currentIndex = 0
+    }
+
+    slideHandler(currentIndex)
+
+    sliderControls.forEach((control, index) => {
+      control.classList.remove('active')
+
+      if(index === currentIndex){
+        control.classList.add('active')
+      }
+    })
+
+
+  }, delay);
+}
+
 window.addEventListener('load', () => {
   currentTheme = localStorage.getItem('user-theme')
 
@@ -186,4 +232,6 @@ window.addEventListener('load', () => {
       renderProjects(projectType)
     }
   })
+
+  autoSlide(5000)
 })

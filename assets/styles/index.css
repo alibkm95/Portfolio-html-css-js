@@ -709,6 +709,7 @@ body {
   display: flex;
   gap: 1rem;
   transform: translateX(calc(-200% - 2rem));
+  transition: all 0.3s ease-in-out;
 }
 
 .slider__item {
@@ -717,6 +718,7 @@ body {
   background-color: var(--elem-bg);
   border-radius: 10px;
   padding: 1rem;
+  transition: opacity 0.3s ease-in-out;
   display: grid;
   grid-auto-columns: 1fr;
   gap: 1rem;
